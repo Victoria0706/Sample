@@ -73,3 +73,21 @@ class FeatureEncoder(BaseEstimator, TransformerMixin):
         for i in range(len(matrix.T)):
             x[column_names[i]] = matrix.T[i]
             return x 
+
+## Step 8 - FeatureDropper (To Drop the Category)
+
+class FeatureDropper(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X.drop(["Embarked", "Name", "Ticket", "Cabin", "Sex", "N"], axis=1, erros="ignore")
+
+## Step 9 - Pipeline
+
+from sklearn.pipeline import Pipeline 
+
+pipeline = Pipeline([("featureencoder", FeatureEncoder()), 
+                    ("featuredropper", FeatureDropper())])
+
+        
