@@ -1,4 +1,25 @@
-# Step 1 - Stratified Shuffle Split 
+## Step 1 - Import Necessary Library
+
+import os
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import sklearn
+
+## Step 2 - Finding Missing Value 
+
+df.isnull().sum()
+
+## Step 3 - Map the Data using Heatmap
+
+import warnings
+warnings.filterwarnings("ignore")
+
+sns.heatmap(df.corr(), cmap="YlGnBu")
+plt.show()
+
+## Step 4 - Stratified Shuffle Split 
 
 from sklearn.model_selection import StratifiedShuffleSplit 
 split = StratifiedShuffleSplit(n_splits=1,test_size=0.2)
@@ -6,7 +27,10 @@ for train_indices, test_indices in split.split(df, df[["Survived", "Pclass", "Se
     strat_train_set = df.loc[train_indices]
     strat_test_set = df.loc[test_indices]
 
-# Step 2 - Plot the Data 
+strat_test_set
+
+## Step 5 - Plot the Data 
+
 plt.subplot(1,2,1)
 strat_train_set['Survived'].hist()
 strat_train_set['Pclass'].hist()
@@ -16,3 +40,19 @@ strat_test_set['Survived'].hist()
 strat_test_set['Pclass'].hist()
 
 plt.show()
+
+## Step 6 - AgeImputer (To Fill in Missing Age)
+
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.impute import SimpleImputer
+
+class AgeImputer(BaseEstimator, TransformerMixin):
+
+    def fit(sel, x, y=None):
+        return self 
+    def transform(self, x):
+        imputer = SimpleImputer(strategy="mean")
+        x['Age'] = imputer.fit_transform(x[['Age']])
+        return x
+
+## Step 7 - 
