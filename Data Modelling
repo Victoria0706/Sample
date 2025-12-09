@@ -55,4 +55,21 @@ class AgeImputer(BaseEstimator, TransformerMixin):
         x['Age'] = imputer.fit_transform(x[['Age']])
         return x
 
-## Step 7 - 
+## Step 7 - FeatureEncoder (Embarked, Sex)
+
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import OneHotEncoder
+class FeatureEncoder(BaseEstimator, TransformerMixin):
+    def fit(self, x, y=None):
+        return self 
+    def transform(self, x):
+        encoder = OneHotEncoder()
+        matrix = encoder.fit_transform(x[['Embarked']]).toarray()
+        column_names = ["C", "S", "Q", "N"]
+        for i in range(len(matrix.T)):
+            x[column_names[i]] = matrix.T[i]
+        matrix = encoder.fit_transform(x[['Sex']]).toarray()
+        column_names =["Female", "Male"]
+        for i in range(len(matrix.T)):
+            x[column_names[i]] = matrix.T[i]
+            return x 
