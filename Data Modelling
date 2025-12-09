@@ -1,0 +1,18 @@
+# Step 1 - Stratified Shuffle Split 
+
+from sklearn.model_selection import StratifiedShuffleSplit 
+split = StratifiedShuffleSplit(n_splits=1,test_size=0.2)
+for train_indices, test_indices in split.split(df, df[["Survived", "Pclass", "Sex"]]):
+    strat_train_set = df.loc[train_indices]
+    strat_test_set = df.loc[test_indices]
+
+# Step 2 - Plot the Data 
+plt.subplot(1,2,1)
+strat_train_set['Survived'].hist()
+strat_train_set['Pclass'].hist()
+
+plt.subplot(1,2,2)
+strat_test_set['Survived'].hist()
+strat_test_set['Pclass'].hist()
+
+plt.show()
