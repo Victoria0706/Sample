@@ -109,7 +109,7 @@ def wisker(col):
 
 pd.get_dummies(data=df,columns=["Survived","Pclass"],drop_first=True)
 
-# Step 8 - Sklearn Model 
+# Step 8 - Stratified Shuffle Split 
 
 from sklearn.model_selection import StratifiedShuffleSplit 
 split = StratifiedShuffleSplit(n_splits=1,test_size=0.2)
