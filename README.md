@@ -109,12 +109,6 @@ def wisker(col):
 
 pd.get_dummies(data=df,columns=["Survived","Pclass"],drop_first=True)
 
-# Step 8 - Stratified Shuffle Split 
 
-from sklearn.model_selection import StratifiedShuffleSplit 
-split = StratifiedShuffleSplit(n_splits=1,test_size=0.2)
-for train_indices, test_indices in split.split(df, df[["Survived", "Pclass", "Sex"]]):
-    strat_train_set = df.loc[train_indices]
-    strat_test_set = df.loc[test_indices]
   
     
